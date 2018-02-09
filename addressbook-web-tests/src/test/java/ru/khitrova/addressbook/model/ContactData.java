@@ -1,4 +1,4 @@
-package ru.khitrova.addressbook;
+package ru.khitrova.addressbook.model;
 
 public class ContactData {
     private final String firstname;

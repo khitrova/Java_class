@@ -1,4 +1,4 @@
-package ru.khitrova.addressbook;
+package ru.khitrova.addressbook.tests;
 
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.BeforeMethod;
@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.*;
+import ru.khitrova.addressbook.model.ContactData;
 
 public class ContactCreationTest {
     FirefoxDriver wd;
