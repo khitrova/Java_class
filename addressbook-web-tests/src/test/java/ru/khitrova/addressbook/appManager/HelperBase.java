@@ -35,4 +35,14 @@ public class HelperBase {
             click(By.xpath(locator));
         }
     }
+
+    protected void clickCheckBox(String id) {
+        if (!wd.findElement(By.xpath(id)).isSelected()) {
+            wd.findElement(By.xpath(id)).click();
+        }
+    }
+
+    protected void alertConfirm() {
+        wd.switchTo().alert().accept();
+    }
 }

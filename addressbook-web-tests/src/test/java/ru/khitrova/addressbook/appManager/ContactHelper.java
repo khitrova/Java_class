@@ -41,4 +41,22 @@ public class ContactHelper extends HelperBase {
     public void submitContactModification() {
         click(By.xpath("//div[@id='content']/form[1]/input[22]"));
     }
+
+    public void selectContact() {
+        clickCheckBox("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input");
+    }
+
+
+    public void deleteContact() {
+        click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+    }
+
+    public void deleteEditedContact() {
+        click(By.xpath("//div[@id='content']/form[2]/input[2]"));
+    }
+
+    public void confirmDeletion() {
+        alertConfirm();
+    }
+
 }
