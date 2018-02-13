@@ -14,7 +14,7 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("home"));
     }
 
-    public void confirnCreation() {
+    public void confirmCreation() {
        click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
