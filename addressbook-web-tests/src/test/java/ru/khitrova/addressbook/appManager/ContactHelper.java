@@ -2,7 +2,8 @@ package ru.khitrova.addressbook.appManager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.khitrova.addressbook.model.ContactData;
 
 public class ContactHelper extends HelperBase {
@@ -16,18 +17,24 @@ public class ContactHelper extends HelperBase {
     }
 
     public void confirmCreation() {
-       click(By.xpath("//div[@id='content']/form/input[21]"));
+        click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
-    public void fillContactForm(ContactData contactData) {
-        type(By.name("firstname"),contactData.getFirstname());
-        type(By.name("lastname"),contactData.getLastname());
-        type(By.name("home"),contactData.getPhone());
-        type(By.name("email"),contactData.getEmail());
+    public void fillContactForm(ContactData contactData, boolean creation) {
+        type(By.name("firstname"), contactData.getFirstname());
+        type(By.name("lastname"), contactData.getLastname());
+        type(By.name("home"), contactData.getPhone());
+        type(By.name("email"), contactData.getEmail());
+
+        if (creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
 
         dropDownClick("//div[@id='content']/form/select[1]//option[3]");
         dropDownClick("//div[@id='content']/form/select[2]//option[7]");
-        type(By.name("byear"),contactData.getYear());
+        type(By.name("byear"), contactData.getYear());
 
     }
 
