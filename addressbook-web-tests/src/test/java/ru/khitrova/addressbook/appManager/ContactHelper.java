@@ -1,10 +1,12 @@
 package ru.khitrova.addressbook.appManager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.khitrova.addressbook.model.ContactData;
+import ru.khitrova.addressbook.model.GroupData;
 
 public class ContactHelper extends HelperBase {
 
@@ -12,7 +14,7 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-       public void confirmCreation() {
+    public void confirmCreation() {
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
@@ -23,6 +25,11 @@ public class ContactHelper extends HelperBase {
         type(By.name("email"), contactData.getEmail());
 
         if (creation) {
+            if (!listGroup(contactData)) {
+                new NavigationHelper(wd).gotoGroupPage();
+                new GroupHelper(wd).createGroup(new GroupData("test1", null, null));
+                createContact(contactData, creation);
+            }
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
@@ -34,12 +41,22 @@ public class ContactHelper extends HelperBase {
 
     }
 
+    private boolean listGroup(ContactData contactData) {
+        try {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+
+    }
+
     public void gotoNewContact() {
         click(By.linkText("add new"));
     }
 
     public void editContact() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+        click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img"));
     }
 
     public void submitContactModification() {
@@ -62,5 +79,17 @@ public class ContactHelper extends HelperBase {
     public void confirmDeletion() {
         alertConfirm();
     }
+
+    public void createContact(ContactData contactData, boolean create) {
+        gotoNewContact();
+        fillContactForm(contactData, create);
+        confirmCreation();
+    }
+
+
+    public boolean isContactPresent() {
+        return (isElementPresent(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input")));
+    }
+
 
 }
