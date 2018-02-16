@@ -12,11 +12,7 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void returnContactList() {
-        click(By.linkText("home"));
-    }
-
-    public void confirmCreation() {
+       public void confirmCreation() {
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
