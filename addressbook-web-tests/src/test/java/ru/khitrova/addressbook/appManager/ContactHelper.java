@@ -25,11 +25,6 @@ public class ContactHelper extends HelperBase {
         type(By.name("email"), contactData.getEmail());
 
         if (creation) {
-            if (!listGroup(contactData)) {
-                new NavigationHelper(wd).gotoGroupPage();
-                new GroupHelper(wd).createGroup(new GroupData("test1", null, null));
-                createContact(contactData, creation);
-            }
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
@@ -92,4 +87,18 @@ public class ContactHelper extends HelperBase {
     }
 
 
+    public void checkContact(ContactData contactData,boolean creation, boolean needNewContact ) {
+        if (!isContactPresent()){
+            gotoNewContact();
+            if (!listGroup(contactData)) {
+                new NavigationHelper(wd).gotoGroupPage();
+                new GroupHelper(wd).createGroup(new GroupData("test1", null, null));
+
+            }
+            if (needNewContact) {
+                createContact(contactData, creation);
+            }
+
+        }
+    }
 }
