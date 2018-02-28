@@ -26,13 +26,7 @@ public class GroupData {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "GroupData{" +
-                "name='" + name + '\'' +
-                ", id='" + id + '\'' +
-                '}';
-    }
+
 
     public int getId() { return id; }
 
@@ -46,6 +40,14 @@ public class GroupData {
 
     public String getFooter() {
         return footer;
+    }
+
+    @Override
+    public String toString() {
+        return "GroupData{" +
+                "name='" + name + '\'' +
+                ", id='" + id + '\'' +
+                '}';
     }
 
     @Override

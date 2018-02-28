@@ -3,10 +3,14 @@ package ru.khitrova.addressbook.appManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.khitrova.addressbook.model.ContactData;
 import ru.khitrova.addressbook.model.GroupData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -50,18 +54,18 @@ public class ContactHelper extends HelperBase {
         click(By.linkText("add new"));
     }
 
-    public void editContact() {
-        click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img"));
+    public void editContact(int index) {
+        click(By.xpath("//div/div[4]/form[2]/table/tbody/tr["+index+"]/td[8]/a/img"));
     }
 
     public void submitContactModification() {
         click(By.xpath("//div[@id='content']/form[1]/input[22]"));
     }
 
-    public void selectContact() {
-        clickCheckBox("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input");
+    public void selectContact(int index) {
+       wd.findElements(By.name("selected[]")).get(index).click();
     }
-
+//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input
 
     public void deleteContact() {
         click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
@@ -101,4 +105,25 @@ public class ContactHelper extends HelperBase {
 
         }
     }
+
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name = 'entry']"));
+    //    List<WebElement> cells = element.findElements(By.tagName("td"));
+            for (WebElement element : elements ) {
+                String name = element.findElement(By.xpath(".//td[3]")).getText();
+                String lastName = element.findElement(By.xpath(".//td[2]")).getText();
+                int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+                ContactData group = new ContactData(id, name, lastName, null,null,null,null);
+                contacts.add(group);
+
+            }
+            return contacts;
+
+    }
 }
+//*[@id="maintable"]/tbody/tr[4]/td[2]
+
+
+
+//*[@id="25"]
