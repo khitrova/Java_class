@@ -50,7 +50,7 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void gotoNewContact() {
+    public void newContact() {
         click(By.linkText("add new"));
     }
 
@@ -80,7 +80,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void createContact(ContactData contactData, boolean create) {
-        gotoNewContact();
+        newContact();
         fillContactForm(contactData, create);
         confirmCreation();
     }
@@ -93,10 +93,10 @@ public class ContactHelper extends HelperBase {
 
     public void checkContact(ContactData contactData,boolean creation, boolean needNewContact ) {
         if (!isContactPresent()){
-            gotoNewContact();
+            newContact();
             if (!listGroup(contactData)) {
-                new NavigationHelper(wd).gotoGroupPage();
-                new GroupHelper(wd).createGroup(new GroupData("test1", null, null));
+                new NavigationHelper(wd).groupPage();
+                new GroupHelper(wd).create(new GroupData("test1", null, null));
 
             }
             if (needNewContact) {
@@ -111,19 +111,16 @@ public class ContactHelper extends HelperBase {
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name = 'entry']"));
     //    List<WebElement> cells = element.findElements(By.tagName("td"));
             for (WebElement element : elements ) {
+
                 String name = element.findElement(By.xpath(".//td[3]")).getText();
                 String lastName = element.findElement(By.xpath(".//td[2]")).getText();
                 int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-                ContactData group = new ContactData(id, name, lastName, null,null,null,null);
-                contacts.add(group);
+                ContactData contact = new ContactData(id, name, lastName, null,null,null,null);
+                contacts.add(contact);
+
 
             }
             return contacts;
 
     }
 }
-//*[@id="maintable"]/tbody/tr[4]/td[2]
-
-
-
-//*[@id="25"]
