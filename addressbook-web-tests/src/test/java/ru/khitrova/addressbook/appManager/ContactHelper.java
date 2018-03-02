@@ -96,7 +96,7 @@ public class ContactHelper extends HelperBase {
             newContact();
             if (!listGroup(contactData)) {
                 new NavigationHelper(wd).groupPage();
-                new GroupHelper(wd).create(new GroupData("test1", null, null));
+                new GroupHelper(wd).create(new GroupData().withName("test1"));
 
             }
             if (needNewContact) {

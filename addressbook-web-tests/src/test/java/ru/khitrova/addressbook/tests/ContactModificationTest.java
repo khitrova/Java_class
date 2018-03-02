@@ -22,11 +22,12 @@ public class ContactModificationTest extends TestBase {
 
         List<ContactData> before = app.contact().getContactList();
         int index = before.size()-1;
-        app.contact().editContact(index);
+        app.contact().editContact(before.size()+1);
         ContactData contact = new ContactData(before.get(index).getId(),"NewName22", "LastName11", "89012345678", "test@email.test", "1990", "null");
         app.contact().fillContactForm(contact,false);
         app.contact().submitContactModification();
         app.goTo().homePage();
+
 
         List<ContactData> after = app.contact().getContactList();
         Assert.assertEquals(after.size(), before.size());
