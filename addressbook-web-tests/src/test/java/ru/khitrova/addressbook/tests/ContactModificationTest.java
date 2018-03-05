@@ -7,14 +7,13 @@ import ru.khitrova.addressbook.model.ContactData;
 import ru.khitrova.addressbook.model.Contacts;
 
 import java.util.Comparator;
-import java.util.List;
 
 public class ContactModificationTest extends TestBase {
 
     @BeforeMethod
     public void enshurePreconditions(){
         app.goTo().homePage();
-        app.contact().checkContact(
+        app.contact().preconditionalContact(
                 new ContactData().withFirstName("Name").withLastName("LastName").withPhone("89012345678").withEmail("test@email.test").withYear("1990").withGroup("test1"), true, true);
     }
 

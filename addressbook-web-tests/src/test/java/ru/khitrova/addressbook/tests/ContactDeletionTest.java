@@ -1,20 +1,23 @@
 package ru.khitrova.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.khitrova.addressbook.model.ContactData;
 import ru.khitrova.addressbook.model.Contacts;
 
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class ContactDeletionTest extends TestBase {
 
     @BeforeMethod
     public void enshurePreconditions(){
         app.goTo().homePage();
-        app.contact().checkContact(
-                new ContactData().withFirstName("Name").withLastName("LastName").withPhone("89012345678").withEmail("test@email.test").withYear("1990").withGroup("test1"), true, true);
+        if (app.contact().all().size() == 0) {
+            app.contact().preconditionalContact(
+                    new ContactData().withFirstName("Name").withLastName("LastName").withPhone("89012345678").withEmail("test@email.test").withYear("1990").withGroup("test1"), true, true);
+        }
     }
 
     @Test
@@ -22,29 +25,30 @@ public class ContactDeletionTest extends TestBase {
 
 
         Contacts before = app.contact().all();
-        app.contact().selectContact(before.size()-1);
-        app.contact().deleteContact();
+        ContactData deletedContact = before.iterator().next();
+
+        app.contact().delete(deletedContact);
         app.contact().confirmDeletion();
 
         Contacts after = app.contact().all();
-        Assert.assertEquals(after.size(), before.size()-1);
+        assertThat(after.size(), equalTo(before.size() - 1));
 
-        before.remove(before.size()-1);
-        Assert.assertEquals(before, after);
+        assertThat(after, equalTo(before.without(deletedContact)));
 
     }
-/*
+
     @Test //Удаление со страницы редактирования контакта
     public void testContactEditDeletion() {
 
 
-        List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().editContact();
-        app.getContactHelper().deleteEditedContact();
-         List<ContactData> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(after.size(), before.size()-1);
+        Contacts before = app.contact().all();
+        ContactData deletedContact = before.iterator().next();
+        app.contact().editContact(deletedContact);
+        app.contact().deleteEditedContact();
+        Contacts after = app.contact().all();
+        assertThat(after.size(), equalTo(before.size() - 1));
         before.remove(before.size()-1);
-        Assert.assertEquals(before, after);
+        assertThat(after, equalTo(before.without(deletedContact)));
 
-}*/
+}
 }

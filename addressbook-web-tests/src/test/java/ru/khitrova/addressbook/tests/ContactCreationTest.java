@@ -16,7 +16,7 @@ public class ContactCreationTest extends TestBase {
         Contacts before = app.contact().all();
 
         app.contact().newContact();
-        app.contact().checkContact(new ContactData().withGroup("test1"), true, false);
+        app.contact().preconditionalContact(new ContactData().withGroup("test1"), true, false);
         ContactData contact = new ContactData().withFirstName("Name").withLastName("LastName").withPhone("89012345678").withEmail("test@email.test").withYear("1990").withGroup("test1");
         app.contact().createContact(contact, true);
         app.goTo().homePage();
