@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.khitrova.addressbook.model.ContactData;
+import ru.khitrova.addressbook.model.Contacts;
 import ru.khitrova.addressbook.model.GroupData;
 
 import java.util.ArrayList;
@@ -106,8 +107,8 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    public List<ContactData> getContactList() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name = 'entry']"));
     //    List<WebElement> cells = element.findElements(By.tagName("td"));
             for (WebElement element : elements ) {
@@ -115,7 +116,7 @@ public class ContactHelper extends HelperBase {
                 String name = element.findElement(By.xpath(".//td[3]")).getText();
                 String lastName = element.findElement(By.xpath(".//td[2]")).getText();
                 int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-                ContactData contact = new ContactData(id, name, lastName, null,null,null,null);
+                ContactData contact = new ContactData().withId(id).withFirstName(name).withLastName(lastName);
                 contacts.add(contact);
 
 
