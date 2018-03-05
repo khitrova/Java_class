@@ -8,13 +8,18 @@ import ru.khitrova.addressbook.model.Contacts;
 
 import java.util.Comparator;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class ContactModificationTest extends TestBase {
 
     @BeforeMethod
     public void enshurePreconditions(){
         app.goTo().homePage();
-        app.contact().preconditionalContact(
-                new ContactData().withFirstName("Name").withLastName("LastName").withPhone("89012345678").withEmail("test@email.test").withYear("1990").withGroup("test1"), true, true);
+        if (app.contact().all().size() == 0) {
+            app.contact().preconditionalContact(
+                    new ContactData().withFirstName("Name").withLastName("LastName").withPhone("89012345678").withEmail("test@email.test").withYear("1990").withGroup("test1"), true, true);
+        }
     }
 
     @Test
@@ -22,37 +27,19 @@ public class ContactModificationTest extends TestBase {
 
 
        Contacts before = app.contact().all();
-        int index = before.size()-1;
-        app.contact().editContact(before.size()+1);
-      //  ContactData contact = new ContactData(before.get(index).getId(),"NewName22", "LastName11", "89012345678", "test@email.test", "1990", "null");
-    //    app.contact().fillContactForm(contact,false);
+        ContactData modifyContact = before.iterator().next();
+        app.contact().editContact(modifyContact);
+        ContactData contact = new ContactData().withId(modifyContact.getId()).withFirstName("ChangedName").withLastName("LastName11");
+        app.contact().fillContactForm(contact,false);
         app.contact().submitContactModification();
         app.goTo().homePage();
 
 
         Contacts after = app.contact().all();
-        Assert.assertEquals(after.size(), before.size());
-   //     System.out.println(before.get(index));
-        System.out.println(before);
-        System.out.println(after);
-        before.remove(index);
-        System.out.println(before);
-  //      before.add(contact);
 
-        System.out.println(before);
-        Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-  //      before.sort(byId);
+        assertThat(after.size(), equalTo(before.size()));
 
- //       after.sort(byId);
-        System.out.println("sort");
-
-
-        System.out.println(before);
-        System.out.println(after);
-
-
-
-        Assert.assertEquals(before, after);
+        assertThat(after, equalTo(before.without(modifyContact).withAdded(contact)));
 
 
     }
