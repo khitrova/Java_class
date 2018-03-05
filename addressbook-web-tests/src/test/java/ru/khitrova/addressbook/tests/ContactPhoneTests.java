@@ -1,5 +1,6 @@
 package ru.khitrova.addressbook.tests;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.khitrova.addressbook.model.ContactData;
 
@@ -11,15 +12,23 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactPhoneTests extends TestBase {
 
-    @Test(enabled = false)
+    @BeforeMethod
+    public void enshurePreconditions(){
+        app.goTo().homePage();
+        if (app.contact().all().size() == 0) {
+            app.contact().preconditionalContact(
+                    new ContactData().withFirstName("Name").withLastName("LastName").withPhone("89012345678").withEmail("test@email.test").withYear("1990").withGroup("test1"), true, true);
+        }
+    }
+
+    @Test(enabled = true)
     public void testContactPhones(){
         app.goTo().homePage();
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditedForm = app.contact().infoFromEditedForm(contact);
 
-        assertThat(contact.getEmail(), equalTo(merged(contactInfoFromEditedForm)));
-        assertThat(contact.getPhoneMobile(), equalTo(cleaned(contactInfoFromEditedForm.getPhoneMobile())));
-        assertThat(contact.getPhoneWork(), equalTo(cleaned(contactInfoFromEditedForm.getPhoneWork())));
+        assertThat(contact.getAllPhones(), equalTo(merged(contactInfoFromEditedForm)));
+        
 
     }
 

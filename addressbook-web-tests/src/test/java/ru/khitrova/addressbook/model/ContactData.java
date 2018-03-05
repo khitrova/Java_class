@@ -13,17 +13,17 @@ public class ContactData {
     private String home;
     private String work;
     private String mobile;
+    private String adress;
+    private String allPhones;
 
-    public String getAllPhones() {
-        return allPhones;
-    }
+
 
     public ContactData withAllPhones(String allPhones) {
         this.allPhones = allPhones;
         return this;
     }
 
-    private String allPhones;
+
 
 
     public ContactData withId(int id){
@@ -60,6 +60,25 @@ public class ContactData {
         return this;
     }
 
+    public ContactData withPhoneHome(String home) {
+        this.home = home;
+        return this;
+    }
+
+    public ContactData withPhoneWork(String work) {
+        this.work = work;
+        return this;
+    }
+    public ContactData withPhoneMobile(String mobile) {
+        this.mobile = mobile;
+        return this;
+    }
+
+    public ContactData withAdress(String adress) {
+        this.adress = adress;
+        return this;
+    }
+
 
 
 
@@ -91,19 +110,16 @@ public class ContactData {
         return id;
     }
 
-    public ContactData withPhoneHome(String home) {
-        this.home = home;
-        return this;
+    public String getAllPhones() {
+        return allPhones;
+    }
+    public String getAddress() {
+        return adress;
     }
 
-    public ContactData withPhoneWork(String work) {
-        this.work = work;
-        return this;
-    }
-    public ContactData withPhoneMobile(String mobile) {
-        this.mobile = mobile;
-        return this;
-    }
+
+
+
 
     @Override
     public String toString() {
@@ -142,4 +158,6 @@ public class ContactData {
     public String getPhoneWork() {
         return work;
     }
+
+
 }

@@ -58,7 +58,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void editContact(int index) {
-        click(By.xpath("//div/div[4]/form[2]/table/tbody/tr["+index+"]/td[8]/a/img"));
+        click(By.cssSelector(String.format("a[href='edit.php?id=%s']", index)));
     }
     public void editContact(ContactData contact) {
         click(By.cssSelector("a[href='edit.php?id="+contact.getId()+"']"));
@@ -128,10 +128,11 @@ public class ContactHelper extends HelperBase {
                 String name = element.findElement(By.xpath(".//td[3]")).getText();
                 String lastName = element.findElement(By.xpath(".//td[2]")).getText();
                 String allPhones = element.findElement(By.xpath(".//td[6]")).getText();
+                String address = element.findElement(By.xpath(".//td[4]")).getText();
                 //String[] phones = element.findElement(By.xpath(".//td[6]")).getText().split("\n");
                 int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
                // ContactData contact = new ContactData().withId(id).withFirstName(name).withLastName(lastName).withPhoneHome(phones[0]).withPhoneMobile(phones[1]).withPhoneWork(phones[2]);
-                ContactData contact = new ContactData().withId(id).withFirstName(name).withLastName(lastName).withAllPhones(allPhones);
+                ContactData contact = new ContactData().withId(id).withFirstName(name).withLastName(lastName).withAllPhones(allPhones).withAdress(address);
                 contacts.add(contact);
 
 
@@ -141,7 +142,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public ContactData infoFromEditedForm(ContactData contact) {
-        selectContact(contact.getId());
+        editContact(contact.getId());
         String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
         String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
         String home = wd.findElement(By.name("home")).getAttribute("value");
