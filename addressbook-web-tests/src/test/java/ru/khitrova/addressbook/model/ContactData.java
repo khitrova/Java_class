@@ -74,7 +74,7 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withAdress(String adress) {
+    public ContactData withAddress(String adress) {
         this.adress = adress;
         return this;
     }

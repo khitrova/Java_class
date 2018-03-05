@@ -10,10 +10,7 @@ import ru.khitrova.addressbook.model.ContactData;
 import ru.khitrova.addressbook.model.Contacts;
 import ru.khitrova.addressbook.model.GroupData;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.sun.org.apache.xml.internal.serialize.LineSeparator.Web;
 
 public class ContactHelper extends HelperBase {
 
@@ -132,7 +129,7 @@ public class ContactHelper extends HelperBase {
                 //String[] phones = element.findElement(By.xpath(".//td[6]")).getText().split("\n");
                 int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
                // ContactData contact = new ContactData().withId(id).withFirstName(name).withLastName(lastName).withPhoneHome(phones[0]).withPhoneMobile(phones[1]).withPhoneWork(phones[2]);
-                ContactData contact = new ContactData().withId(id).withFirstName(name).withLastName(lastName).withAllPhones(allPhones).withAdress(address);
+                ContactData contact = new ContactData().withId(id).withFirstName(name).withLastName(lastName).withAllPhones(allPhones).withAddress(address);
                 contacts.add(contact);
 
 
@@ -148,8 +145,9 @@ public class ContactHelper extends HelperBase {
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
         String work = wd.findElement(By.name("work")).getAttribute("value");
+        String address = wd.findElement(By.name("address")).getText();
         wd.navigate().back();
-        return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname).withPhoneHome(home).withPhoneMobile(mobile).withPhoneWork(work);
+        return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname).withPhoneHome(home).withPhoneMobile(mobile).withPhoneWork(work).withAddress(address);
 
     }
 

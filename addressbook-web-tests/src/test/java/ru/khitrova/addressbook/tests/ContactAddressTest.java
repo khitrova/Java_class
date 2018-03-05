@@ -1,7 +1,5 @@
 package ru.khitrova.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.khitrova.addressbook.model.ContactData;
@@ -16,7 +14,7 @@ public class ContactAddressTest extends TestBase {
         app.goTo().homePage();
         if (app.contact().all().size() == 0) {
             app.contact().preconditionalContact(
-                    new ContactData().withFirstName("Name").withLastName("LastName").withAdress("some address"), true, true);
+                    new ContactData().withFirstName("Name").withLastName("LastName").withAddress("some address"), true, true);
         }
     }
 

@@ -28,7 +28,7 @@ public class ContactPhoneTests extends TestBase {
         ContactData contactInfoFromEditedForm = app.contact().infoFromEditedForm(contact);
 
         assertThat(contact.getAllPhones(), equalTo(merged(contactInfoFromEditedForm)));
-        
+
 
     }
 
