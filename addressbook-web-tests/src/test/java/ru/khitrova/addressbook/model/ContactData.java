@@ -1,5 +1,6 @@
 package ru.khitrova.addressbook.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class ContactData {
@@ -18,6 +19,7 @@ public class ContactData {
     private String allEmails;
     private String email2;
     private String email3;
+    private File photo;
 
 
 
@@ -95,6 +97,11 @@ public class ContactData {
         return this;
     }
 
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
+
 
 
 
@@ -158,6 +165,11 @@ public class ContactData {
         return allEmails;
     }
 
+    public File getPhoto() {
+        return photo;
+    }
+
+
 
 
 
@@ -185,6 +197,8 @@ public class ContactData {
 
         return Objects.hash(firstname, lastname, id);
     }
+
+
 
 
 }
