@@ -1,20 +1,27 @@
 package ru.khitrova.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.File;
 import java.util.Objects;
 
 public class ContactData {
+    @Expose
     private  String firstname;
+    @Expose
     private  String lastname;
     private  String phone;
+    @Expose
     private  String email;
     private  String year;
     private String group;
     private int id;
+    @Expose
     private String home;
     private String work;
     private String mobile;
-    private String adress;
+    @Expose
+    private String address;
     private String allPhones;
     private String allEmails;
     private String email2;
@@ -83,7 +90,7 @@ public class ContactData {
     }
 
     public ContactData withAddress(String adress) {
-        this.adress = adress;
+        this.address = adress;
         return this;
     }
 
@@ -146,7 +153,7 @@ public class ContactData {
         return allPhones;
     }
     public String getAddress() {
-        return adress;
+        return address;
     }
 
     public String getPhoneHome() {

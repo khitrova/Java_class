@@ -1,0 +1,26 @@
+<list>
+  <ru.khitrova.addressbook.model.ContactData>
+    <firstname>Name 0</firstname>
+    <lastname>LastName 0</lastname>
+    <email>0@test.mail</email>
+    <id>0</id>
+    <home>00000000</home>
+    <adress>Added address 0</adress>
+  </ru.khitrova.addressbook.model.ContactData>
+  <ru.khitrova.addressbook.model.ContactData>
+    <firstname>Name 1</firstname>
+    <lastname>LastName 1</lastname>
+    <email>1@test.mail</email>
+    <id>0</id>
+    <home>00000001</home>
+    <adress>Added address 1</adress>
+  </ru.khitrova.addressbook.model.ContactData>
+  <ru.khitrova.addressbook.model.ContactData>
+    <firstname>Name 2</firstname>
+    <lastname>LastName 2</lastname>
+    <email>2@test.mail</email>
+    <id>0</id>
+    <home>00000002</home>
+    <adress>Added address 2</adress>
+  </ru.khitrova.addressbook.model.ContactData>
+</list>
