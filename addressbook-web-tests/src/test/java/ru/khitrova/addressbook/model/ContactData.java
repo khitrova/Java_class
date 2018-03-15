@@ -14,6 +14,7 @@ public class ContactData {
     @Expose
     private  String email;
     private  String year;
+    @Expose
     private String group;
     private int id;
     @Expose
@@ -29,6 +30,12 @@ public class ContactData {
     private File photo;
 
 
+
+    public ContactData withPhoto(File photo) {
+
+        this.photo = photo;
+        return this;
+    }
 
     public ContactData withId(int id){
         this.id = id;
@@ -89,8 +96,8 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withAddress(String adress) {
-        this.address = adress;
+    public ContactData withAddress(String address) {
+        this.address = address;
         return this;
     }
 
@@ -104,10 +111,7 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withPhoto(File photo) {
-        this.photo = photo;
-        return this;
-    }
+
 
 
 

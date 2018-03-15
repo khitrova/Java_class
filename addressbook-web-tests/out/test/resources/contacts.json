@@ -1,5 +1,10 @@
 [
-  {},
-  {},
-  {}
+  {
+    "firstname": "Name 0",
+    "lastname": "LastName 0",
+    "email": "0@test.mail",
+    "group": "new_group",
+    "home": "00000000",
+    "address": "Added address 0"
+  }
 ]

@@ -73,10 +73,11 @@ public class ContactDataGenerator {
 
     private List<ContactData> generateContacts(int count) {
         List<ContactData> contacts = new ArrayList<ContactData>();
+        String photo = new String("src/test/resources/pic.jpg");
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().withFirstName(String.format("Name %s", i))
                     .withLastName(String.format("LastName %s", i)).withAddress(String.format("Added address %s", i))
-                    .withEmail(String.format("%s@test.mail", i)).withPhoneHome(String.format("0000000%s", i)));
+                    .withEmail(String.format("%s@test.mail", i)).withPhoneHome(String.format("0000000%s", i)).withGroup("new_group"));
         }
 
         return contacts;

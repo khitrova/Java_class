@@ -10,6 +10,7 @@ import ru.khitrova.addressbook.model.ContactData;
 import ru.khitrova.addressbook.model.Contacts;
 import ru.khitrova.addressbook.model.GroupData;
 
+import java.io.File;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -27,6 +28,9 @@ public class ContactHelper extends HelperBase {
         type(By.name("lastname"), contactData.getLastname());
         type(By.name("home"), contactData.getPhone());
         type(By.name("email"), contactData.getEmail());
+        type(By.name("home"), contactData.getPhoneHome());
+        type(By.name("address"), contactData.getAddress());
+
         attach(By.name("photo"), contactData.getPhoto());
 
         if (creation) {
@@ -107,7 +111,7 @@ public class ContactHelper extends HelperBase {
             newContact();
             if (!listGroup(contactData)) {
                 new NavigationHelper(wd).groupPage();
-                new GroupHelper(wd).create(new GroupData().withName("test1"));
+                new GroupHelper(wd).create(new GroupData().withName("new_group"));
 
             }
             if (needNewContact) {
