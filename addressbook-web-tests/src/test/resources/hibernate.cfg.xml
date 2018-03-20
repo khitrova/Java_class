@@ -36,6 +36,8 @@
 
         <!-- Names the annotated entity class -->
         <mapping class="ru.khitrova.addressbook.model.GroupData"/>
+        <mapping class="ru.khitrova.addressbook.model.ContactData"/>
+
 
     </session-factory>
 
