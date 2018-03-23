@@ -2,10 +2,13 @@ package ru.khitrova.addressbook.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.thoughtworks.xstream.XStream;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.khitrova.addressbook.model.ContactData;
 import ru.khitrova.addressbook.model.Contacts;
+import ru.khitrova.addressbook.model.GroupData;
 
 
 import java.io.BufferedReader;
@@ -20,6 +23,23 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTest extends TestBase {
+
+    @DataProvider
+    public Iterator<Object[]> validContactsFromXml() throws IOException {
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")))) {
+            String xml = "";
+            String line = reader.readLine();
+            while (line != null) {
+                xml += line;
+                line = reader.readLine();
+            }
+            XStream xstream = new XStream();
+            xstream.processAnnotations(ContactData.class);
+            List<ContactData> contacts = ((List<ContactData>) xstream.fromXML(xml));
+            return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+        }
+    }
 
     @DataProvider
     public Iterator<Object[]> validContactsFromJson() throws IOException {
@@ -38,20 +58,26 @@ public class ContactCreationTest extends TestBase {
         }
     }
 
+    @BeforeMethod
+    public void enshurePreconditions(){
+        if(app.db().groups().size() == 0) {
+            app.goTo().groupPage();
+            app.group().create(new GroupData().withName("test1"));
+        }
+    }
 
-    @Test(dataProvider = "validContactsFromJson")
+
+    @Test(dataProvider = "validContactsFromXml")
     public void testContactCreation(ContactData contact) {
         app.goTo().homePage();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
 
         app.contact().newContact();
-        app.contact().preconditionalContact(new ContactData().withGroup("new_group"), true, false);
-
 
         app.contact().createContact(contact, true);
         app.goTo().homePage();
 
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
 
         assertThat(after.size(), equalTo(before.size() + 1));
 

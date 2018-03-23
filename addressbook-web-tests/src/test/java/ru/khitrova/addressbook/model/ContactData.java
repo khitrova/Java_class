@@ -208,19 +208,25 @@ public class ContactData {
     }
 
     public File getPhoto() {
+
         return new File(photo);
     }
-
-
-
 
 
     @Override
     public String toString() {
         return "ContactData{" +
-                "firstname='" + firstname + '\'' +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", id=" + id +
+
+                ", email='" + email + '\'' +
+                ", home='" + home + '\'' +
+                ", work='" + work + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", address='" + address + '\'' +
+                ", email2='" + email2 + '\'' +
+                ", email3='" + email3 + '\'' +
                 '}';
     }
 
@@ -231,16 +237,19 @@ public class ContactData {
         ContactData that = (ContactData) o;
         return id == that.id &&
                 Objects.equals(firstname, that.firstname) &&
-                Objects.equals(lastname, that.lastname);
+                Objects.equals(lastname, that.lastname) &&
+                Objects.equals(email, that.email) &&
+                Objects.equals(home, that.home) &&
+                Objects.equals(work, that.work) &&
+                Objects.equals(mobile, that.mobile) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(email2, that.email2) &&
+                Objects.equals(email3, that.email3);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(firstname, lastname, id);
+        return Objects.hash(id, firstname, lastname, email, home, work, mobile, address, email2, email3);
     }
-
-
-
-
 }

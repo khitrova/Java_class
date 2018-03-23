@@ -6,5 +6,21 @@
     "group": "new_group",
     "home": "00000000",
     "address": "Added address 0"
+  },
+  {
+    "firstname": "Name 1",
+    "lastname": "LastName 1",
+    "email": "1@test.mail",
+    "group": "new_group",
+    "home": "00000001",
+    "address": "Added address 1"
+  },
+  {
+    "firstname": "Name 2",
+    "lastname": "LastName 2",
+    "email": "2@test.mail",
+    "group": "new_group",
+    "home": "00000002",
+    "address": "Added address 2"
   }
 ]

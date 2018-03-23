@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class ContactDataGenerator {
 
-    @Parameter( names = "-c", description = "group count")
+    @Parameter( names = "-c", description = "contact count")
     public  int count;
 
     @Parameter(names = "-f", description = "Target file")
@@ -77,7 +77,7 @@ public class ContactDataGenerator {
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().withFirstName(String.format("Name %s", i))
                     .withLastName(String.format("LastName %s", i)).withAddress(String.format("Added address %s", i))
-                    .withEmail(String.format("%s@test.mail", i)).withPhoneHome(String.format("0000000%s", i)).withGroup("new_group"));
+                    .withEmail(String.format("%s@test.mail", i)).withPhoneHome(String.format("0000000%s", i)).withGroup("new_group").withPhoto(new File(photo)));
         }
 
         return contacts;
