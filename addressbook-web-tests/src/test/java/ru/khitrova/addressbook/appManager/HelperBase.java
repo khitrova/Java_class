@@ -61,7 +61,7 @@ public class HelperBase {
         }
     }
 
-    protected void alertConfirm() {
+    public void alertConfirm() {
         wd.switchTo().alert().accept();
     }
 

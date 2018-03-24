@@ -6,7 +6,25 @@
     <email>0@test.mail</email>
     <group>new_group</group>
     <home>00000000</home>
+    <work></work>
+    <mobile></mobile>
     <address>Added address 0</address>
+    <email2></email2>
+    <email3></email3>
+    <photo>src\test\resources\pic.jpg</photo>
+  </ru.khitrova.addressbook.model.ContactData>
+  <ru.khitrova.addressbook.model.ContactData>
+    <id>0</id>
+    <firstname>Name 1</firstname>
+    <lastname>LastName 1</lastname>
+    <email>1@test.mail</email>
+    <group>new_group</group>
+    <home>00000001</home>
+    <work></work>
+    <mobile></mobile>
+    <address>Added address 1</address>
+    <email2></email2>
+    <email3></email3>
     <photo>src\test\resources\pic.jpg</photo>
   </ru.khitrova.addressbook.model.ContactData>
 </list>
