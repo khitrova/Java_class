@@ -91,7 +91,10 @@ public class ContactHelper extends HelperBase {
     public void delete(ContactData contact) {
         selectContact(contact.getId());
         deleteContact();
+
     }
+
+
 
     public void deleteEditedContact() {
         click(By.xpath("//div[@id='content']/form[2]/input[2]"));
@@ -177,5 +180,9 @@ public class ContactHelper extends HelperBase {
 
         wd.findElement(By.xpath(String.format("//input[@value='%s']/../../ts[8]/a"))).click();
         wd.findElement(By.xpath(String.format("//tr[.//input[@value='@s']]/td[8]/a"))).click();
+    }
+
+    public int count() {
+        return wd.findElements(By.name("selected[]")).size();
     }
 }
