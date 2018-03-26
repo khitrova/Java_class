@@ -40,7 +40,9 @@ public class ContactHelper extends HelperBase {
            return;
        }
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+           if (ContactData.getGroups().size() >0)
+               Assert.assertTrue(ContactData.getGroups().size() ==0);
+           new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -53,7 +55,7 @@ public class ContactHelper extends HelperBase {
 
     private boolean listGroup(ContactData contactData) {
         try {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        //    new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
             return true;
         } catch (NoSuchElementException ex) {
             return false;
@@ -184,5 +186,9 @@ public class ContactHelper extends HelperBase {
 
     public int count() {
         return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public void addToGroup() {
+        click(By.xpath("//*[@id='content']/form[2]/div[4]/input"));
     }
 }

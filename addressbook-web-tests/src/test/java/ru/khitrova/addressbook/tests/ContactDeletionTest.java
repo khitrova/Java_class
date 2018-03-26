@@ -17,7 +17,7 @@ public class ContactDeletionTest extends TestBase {
         if (app.db().contacts().size() == 0) {
             app.contact().preconditionalContact(
                     new ContactData().withFirstName("Name").withLastName("LastName").withPhone("89012345678")
-                            .withEmail("test@email.test").withYear("1990").withGroup("test1"), true, true);
+                            .withEmail("test@email.test").withYear("1990"), true, true);
         }
     }
 

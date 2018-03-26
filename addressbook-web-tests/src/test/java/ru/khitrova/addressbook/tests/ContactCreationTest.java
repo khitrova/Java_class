@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import ru.khitrova.addressbook.model.ContactData;
 import ru.khitrova.addressbook.model.Contacts;
 import ru.khitrova.addressbook.model.GroupData;
+import ru.khitrova.addressbook.model.Groups;
 
 
 import java.io.BufferedReader;
@@ -69,12 +70,13 @@ public class ContactCreationTest extends TestBase {
 
     @Test(dataProvider = "validContactsFromXml")
     public void testContactCreation(ContactData contact) {
+Groups groups = app.db().groups();
         app.goTo().homePage();
         Contacts before = app.db().contacts();
 
         app.contact().newContact();
 
-        app.contact().createContact(contact, true);
+        app.contact().createContact(contact.inGroup(groups.iterator().next()), true);
         app.goTo().homePage();
 
         Contacts after = app.db().contacts();

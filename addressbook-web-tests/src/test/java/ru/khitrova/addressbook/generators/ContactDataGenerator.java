@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.khitrova.addressbook.model.ContactData;
+import ru.khitrova.addressbook.model.Groups;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -15,6 +16,9 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+
+import static ru.khitrova.addressbook.tests.TestBase.app;
+
 public class ContactDataGenerator {
 
     @Parameter( names = "-c", description = "contact count")
@@ -73,12 +77,14 @@ public class ContactDataGenerator {
 
     private List<ContactData> generateContacts(int count) {
         List<ContactData> contacts = new ArrayList<ContactData>();
+
         String photo = new String("src/test/resources/pic.jpg");
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().withFirstName(String.format("Name %s", i))
                     .withLastName(String.format("LastName %s", i)).withAddress(String.format("Added address %s", i))
-                    .withEmail(String.format("%s@test.mail", i)).withPhoneHome(String.format("0000000%s", i)).withGroup("new_group")
-                    .withPhoto(new File(photo)).withEmail2("").withEmail3("").withPhoneMobile("").withPhoneWork(""));
+                    .withEmail(String.format("%s@test.mail", i)).withPhoneHome(String.format("0000000%s", i))
+                    .withPhoto(new File(photo)).withEmail2("").withEmail3("").withPhoneMobile("").withPhoneWork("")
+            );
         }
 
         return contacts;

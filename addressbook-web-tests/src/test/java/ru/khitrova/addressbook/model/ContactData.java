@@ -5,7 +5,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -28,9 +30,7 @@ public class ContactData {
     private  String email;
     @Transient
     private  String year;
-    @Expose
-    @Transient
-    private String group;
+
 
     @Expose
     @Column(name = "home")
@@ -59,6 +59,15 @@ public class ContactData {
     @Column(name = "photo")
     @Type(type = "text")
     private String photo;
+
+
+
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
 
 
 
@@ -108,10 +117,7 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withGroup(String group){
-        this.group = group;
-        return this;
-    }
+
 
     public ContactData withPhoneHome(String home) {
         this.home = home;
@@ -145,7 +151,9 @@ public class ContactData {
 
 
 
-
+    public Groups getGroups() {
+        return new Groups(groups);
+    }
 
     public String getFirstname() {
         return firstname;
@@ -176,9 +184,6 @@ public class ContactData {
         return year;
     }
 
-    public String getGroup() {
-        return group;
-    }
 
     public int getId() {
         return id;
@@ -211,7 +216,17 @@ public class ContactData {
 
         return new File(photo);
     }
+    public String getHome() {
+        return home;
+    }
 
+    public String getWork() {
+        return work;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
 
     @Override
     public String toString() {
@@ -251,5 +266,10 @@ public class ContactData {
     public int hashCode() {
 
         return Objects.hash(id, firstname, lastname, email, home, work, mobile, address, email2, email3);
+    }
+
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
     }
 }

@@ -26,7 +26,7 @@ public class ContactModificationTest extends TestBase {
         app.goTo().homePage();
         if (app.db().contacts().size() == 0) {
             app.contact().preconditionalContact(
-                    new ContactData().withFirstName("Name").withLastName("LastName").withPhone("89012345678").withEmail("test@email.test").withYear("1990").withGroup("test1"), true, true);
+                    new ContactData().withFirstName("Name").withLastName("LastName").withPhone("89012345678").withEmail("test@email.test").withYear("1990"), true, true);
         }
     }
 
