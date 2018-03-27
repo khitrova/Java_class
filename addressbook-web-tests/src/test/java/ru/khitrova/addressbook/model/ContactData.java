@@ -151,7 +151,7 @@ public class ContactData {
 
 
 
-    public Groups getGroups() {
+    public  Groups getGroups() {
         return new Groups(groups);
     }
 

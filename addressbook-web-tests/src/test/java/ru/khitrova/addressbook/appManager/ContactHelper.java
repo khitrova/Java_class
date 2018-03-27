@@ -40,9 +40,9 @@ public class ContactHelper extends HelperBase {
            return;
        }
         if (creation) {
-           if (ContactData.getGroups().size() >0)
-               Assert.assertTrue(ContactData.getGroups().size() ==0);
-           new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+        //   if (ContactData.getGroups().size() >0)
+         //      Assert.assertTrue(ContactData.getGroups().size() ==0);
+         //  new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -96,7 +96,7 @@ public class ContactHelper extends HelperBase {
 
     }
 
-
+    private Contacts contactCache = null;
 
     public void deleteEditedContact() {
         click(By.xpath("//div[@id='content']/form[2]/input[2]"));
@@ -175,7 +175,7 @@ public class ContactHelper extends HelperBase {
     }
 
     private void initContactmodificationById(int id) {
-        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='$s'", id)));
+        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='$s']", id)));
         WebElement row = checkbox.findElement(By.xpath("./../.."));
         List<WebElement> cells = row.findElements(By.tagName("id"));
         cells.get(7).findElement(By.tagName("a")).click();
@@ -188,7 +188,17 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public void addToGroup() {
+    public void addToGroup(int id) {
+        selectContact(id);
+
         click(By.xpath("//*[@id='content']/form[2]/div[4]/input"));
+    }
+
+    public void removeFromGroup(int id, GroupData group) {
+        click(By.cssSelector(String.format("a[href='view.php?id=%s']", id)));
+        click(By.cssSelector(String.format("a[href='./index.php?group=%s']", group.getId())));
+        selectContact(id);
+        click(By.xpath("//*[@id='content']/form[2]/div[3]/input"));
+
     }
 }
