@@ -188,9 +188,10 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public void addToGroup(int id) {
+    public void addToGroup(int id, GroupData group ) {
         selectContact(id);
 
+        dropDownClick(String.format("//div[@id='content']/form[2]/div[4]/select/option[@value='%s']",group.getId() ));
         click(By.xpath("//*[@id='content']/form[2]/div[4]/input"));
     }
 
