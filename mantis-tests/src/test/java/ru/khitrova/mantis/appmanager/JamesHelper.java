@@ -56,11 +56,7 @@ public class JamesHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        readUntil("Login id:");
-        write("");
-        readUntil("Password:");
-        write("");
-        //second login attempt
+
         readUntil("Login id:");
         write(login);
         readUntil("Password:");
