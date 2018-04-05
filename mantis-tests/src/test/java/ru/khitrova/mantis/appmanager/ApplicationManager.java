@@ -19,6 +19,9 @@ public class ApplicationManager {
     private WebDriver wd;
     private String browser;
     private RegistrationHelper registrationHelper;
+    private NavigationHelper navigationHelper;
+    private AdminToolsHelper adminToolsHelper;
+    private ProfileHelper profileHelper;
     private FtpHelper ftp;
     private MailHelper mailHelper;
     private JamesHelper jamesHelper;
@@ -91,5 +94,26 @@ public class ApplicationManager {
             jamesHelper = new JamesHelper(this);
         }
         return jamesHelper;
+    }
+
+    public NavigationHelper goTo(){
+        if (navigationHelper == null) {
+            navigationHelper = new NavigationHelper(this);
+        }
+        return navigationHelper;
+    }
+
+    public AdminToolsHelper admin() {
+        if (adminToolsHelper == null) {
+            adminToolsHelper = new AdminToolsHelper(this);
+            }
+        return adminToolsHelper;
+    }
+
+    public ProfileHelper profile() {
+        if (profileHelper == null) {
+            profileHelper = new ProfileHelper(this);
+        }
+        return profileHelper;
     }
 }
