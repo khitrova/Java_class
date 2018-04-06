@@ -7,9 +7,12 @@ public class Issue {
     private String description;
     private Project project;
 
+
     public int getId() {
         return id;
     }
+
+
 
     public Issue withId(int id) {
         this.id = id;
