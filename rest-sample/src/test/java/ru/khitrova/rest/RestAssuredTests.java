@@ -20,7 +20,7 @@ public class RestAssuredTests {
 
     @BeforeClass
     public void init(){
-        RestAssured.authentication = RestAssured.basic("28accbe43ea112d9feb328d2c00b3eed", "")
+        RestAssured.authentication = RestAssured.basic("28accbe43ea112d9feb328d2c00b3eed", "");
     }
 
     @Test
@@ -42,7 +42,7 @@ public class RestAssuredTests {
         return new Gson().fromJson(issues, new TypeToken<Set<Issue>>() {
         }.getType());
     }
-     
+
     private int createIssue(Issue newIssue) throws IOException {
 
 
