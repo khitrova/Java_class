@@ -1,4 +1,4 @@
-package ru.khitrova.rest;
+package ru.khitrova.rest.Model;
 
 import java.util.Objects;
 
