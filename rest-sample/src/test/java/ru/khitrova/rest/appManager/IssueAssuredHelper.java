@@ -40,4 +40,12 @@ public class IssueAssuredHelper {
         return parsed.getAsJsonObject().get("issue_id").getAsInt();
 
     }
+
+    public String getIssueState(int issueId) {
+        String json = RestAssured.get(" http://demo.bugify.com/api/issues/"+issueId+".json").asString();
+        JsonElement parsed = new JsonParser().parse(json);
+        JsonElement issues = parsed.getAsJsonObject().get("issues");
+        JsonElement issue_data = issues.getAsJsonArray().get(0);
+        return issue_data.getAsJsonObject().get("state_name").getAsString();
+    }
 }
