@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.khitrova.mantis.appmanager.HttpSession;
 import ru.khitrova.mantis.model.MailMessage;
+import ru.khitrova.mantis.model.Users;
 import ru.khitrova.mantis.model.UsersData;
 import ru.lanwen.verbalregex.VerbalExpression;
 
@@ -22,8 +23,34 @@ public class PasswordChangedTests extends TestBase {
         app.mail().start();
     }
 
+
+
     @Test
-    public void testChangePassword() throws IOException, MessagingException {
+    public void testChangePasswordWithRandomEmail() throws IOException, MessagingException {
+        String password = "newpassword";
+        Users users = app.db().users();
+        UsersData user = users.iterator().next();
+        String email = user.getEmail();
+        String name = user.getUsername();
+        app.admin().loginAsAdmin();
+        // String name = app.admin().getUserName();
+        app.admin().resetUserPassword();
+
+        List<MailMessage> mailMessages = app.mail().wailForMail(1, 10000);
+        String confirmationLink = findConfirmationLink(mailMessages, email);
+        app.admin().logout();
+        app.profile().confirmLink(confirmationLink, password);
+
+        HttpSession session = app.newSession();
+        assertTrue(session.login(name, password));
+        assertTrue(session.isLoggedInAs(name));
+
+    }
+
+
+
+    @Test
+    public void testChangePasswordWithGivenEmail() throws IOException, MessagingException {
         String email = "test@localhost.localdomain";
         String password = "newpassword";
         String name = findLoginFromDb(email);
